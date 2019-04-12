@@ -17,7 +17,7 @@ class Migration_Add_applicants extends CI_Migration {
                 first_name varchar(20) NOT NULL,
                 last_name varchar(20) NOT NULL,
                 first_name_hiragana varchar(20) NOT NULL,
-                last_name_hiragana(20) NOT NULL,
+                last_name_hiragana varchar(20) NOT NULL,
                 email varchar(50) NOT NULL,
                 tel varchar(15) NOT NULL,
                 attribute varchar(50) NOT NULL,

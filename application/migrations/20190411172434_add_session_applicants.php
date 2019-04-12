@@ -1,5 +1,5 @@
 <?php
-class Migration_session_applicants extends CI_Migration {
+class Migration_Add_session_applicants extends CI_Migration {
 
     public function __construct()
     {   
