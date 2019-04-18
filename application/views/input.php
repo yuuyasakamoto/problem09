@@ -19,7 +19,7 @@
 </div>
 
 <div class="form-wrap">
-    <form>
+    <?php echo form_open('/Marketing_summit/check'); ?>
 
         <article class="main-article cool-forms">
             <header>
@@ -55,53 +55,56 @@
 
             <h3>会社名</h3>
             <div class="single">
-                <input type="text" name="" placeholder="例：株式会社ネクストマーケティング">
+                <input type="text" name="company" placeholder="例：株式会社ネクストマーケティング">
+                <span class="error-type02"><?php echo form_error('company'); ?></span>
             </div>
             <h3>部署名</h3>
             <div class="single">
-                <input type="text" name="" placeholder="例：メディア戦略部">
+                <input type="text" name="department" placeholder="例：メディア戦略部">
+                <span class="error-type02"><?php echo form_error('department'); ?></span>
             </div>
             <h3>役職名</h3>
             <div class="single">
-                <input type="text" name="" placeholder="例：事業戦略部長">
+                <input type="text" name="position" placeholder="例：事業戦略部長">
+                <span class="error-type02"><?php echo form_error('position'); ?></span>
             </div>
 
             <h3>ご利用者氏名<span class="required" style="top:0">*</span></h3>
             <div class="double clearfix">
-                <input type="text" class="sur-name" name="" placeholder="姓">
-                <input type="text" class="for-name" name="" placeholder="名">
-                <span class="error-type02">姓を漢字で入力してください。</span>
-                <span class="error-type02">名を漢字で入力してください。</span>
+                <input type="text" class="sur-name" name="first_name" placeholder="姓">
+                <input type="text" class="for-name" name="last_name" placeholder="名">
+                <span class="error-type02"><?php echo form_error('first_name'); ?></span>
+                <span class="error-type02"><?php echo form_error('last_name'); ?></span>
             </div>
             <h3>ご利用者氏名(よみ)<span class="required" style="top:0">*</span></h3>
             <div class="double clearfix">
-                <input type="text" class="sur-name-hiragana" name="" placeholder="せい">
-                <input type="text" class="for-name-hiragana" name="" placeholder="めい">
-                <span class="error-type02">姓をひらがなで入力してください。</span>
-                <span class="error-type02">名をひらがなで入力してください。</span>
+                <input type="text" class="sur-name-hiragana" name="first_name_hiragana" placeholder="せい">
+                <input type="text" class="for-name-hiragana" name="last_name_hiragana" placeholder="めい">
+                <span class="error-type02"><?php echo form_error('first_name_hiragana'); ?></span>
+                <span class="error-type02"><?php echo form_error('last_name_hiragana'); ?></span>
             </div>
             <h3>メールアドレス<span class="required" style="top:0">*</span></h3>
             <div class="single">
-                <input type="text" name="" placeholder="例：sample@example.co.jp">
-                <span class="error-type02">会社のメールアドレスを入力してください。</span>
+                <input type="text" name="email" placeholder="例：sample@example.co.jp">
+                <span class="error-type02"><?php echo form_error('email'); ?></span>
             </div>
 
             <h3>電話番号<span class="required" style="top:0">*</span></h3>
             <div class="single">
-                <input type="text" name="" placeholder="例：0355551234">
-                <span class="error-type02">電話番号を入力してください。※ハイフンなし</span>
+                <input type="text" name=tel" placeholder="例：0355551234">
+                <span class="error-type02"><?php echo form_error('tel'); ?></span>
             </div>
 
             <h3>属性<span class="required" style="top:0">*</span></h3>
-                <span class="error-type02">属性を選択してください。</span>
+                <span class="error-type02"><?php echo form_error('attribute'); ?></span>
             <div class="single singles-height mb20">
-                <label><input type="radio" name="sample02" value=""> アプリ事業者：ゲーム</label><br />
-                <label><input type="radio" name="sample02" value=""> アプリ事業者：ゲーム以外</label><br />
-                <label><input type="radio" name="sample02" value=""> 代理店事業者</label><br />
-                <label><input type="radio" name="sample02" value=""> 広告媒体事業者</label><br />
-                <label><input type="radio" name="sample02" value=""> ツール事業者</label><br />
-                <label><input type="radio" name="sample02" value=""> メディア事業者</label><br />
-                <label><input type="radio" name="sample02" value=""> その他</label>
+                <label><input type="radio" name="attribute" value="アプリ事業者：ゲーム"> アプリ事業者：ゲーム</label><br />
+                <label><input type="radio" name="attribute" value="アプリ事業者：ゲーム以外"> アプリ事業者：ゲーム以外</label><br />
+                <label><input type="radio" name="attribute" value="代理店事業者"> 代理店事業者</label><br />
+                <label><input type="radio" name="attribute" value="広告媒体事業者"> 広告媒体事業者</label><br />
+                <label><input type="radio" name="attribute" value="ツール事業者"> ツール事業者</label><br />
+                <label><input type="radio" name="attribute" value="メディア事業者"> メディア事業者</label><br />
+                <label><input type="radio" name="attribute" value="その他"> その他</label>
             </div>
             </div>
 
@@ -111,29 +114,23 @@
             <div class="position-basic">
                 <h2>11:00 ～ 12:00</h2>
                 <div class="single singles-height mb45">
-
-                    <!--満席の場合  sold-out付 満席の文字はCSSで追加してます//-->
-                    <label class="session-indent sold-out"><input type="checkbox" name="" value="" disabled="disabled"> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-
-                    <!--選択不可の場合  un-selected付//-->
-                    <label class="session-indent un-selected"><input type="checkbox" name="" value="" disabled="disabled"> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                 </div>
 
                 <h2>12:30 ～ 14:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                 </div>
 
                 <h2>14:30 ～ 16:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="checkbox" name="" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                 </div>
 
                 <h2>申込規約</h2>

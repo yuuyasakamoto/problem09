@@ -45,7 +45,7 @@ Next Marketing Summit 2019
                 <tr>
                     <td colspan="2">　└ 招待コード <input type="text" class="invite-code" name="code"
                                                     placeholder="招待コードを入力"/>
-                        <span class="error-type01">※招待コードが違います。</span></td>
+                        <span class="error-type01"><?php if (isset($_GET['applicant_code'])){ echo "※招待コードが違います。";}?></span></td>
                         <span class="error-type01"><?php echo form_error('pass'); ?></span>
                 </tr>
             </table>

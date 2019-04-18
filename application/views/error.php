@@ -23,7 +23,7 @@
         </div>
 
         <div class="tc">
-            <a href="">Next Marketing Summit 2019 のトップへ戻る</a>
+            <a href="/pass/ticket_a">Next Marketing Summit 2019 のトップへ戻る</a>
         </div>
 
     </article>
