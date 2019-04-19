@@ -29,21 +29,22 @@
 
             <div class="position-basic mb45">
                 <table class="form01">
-                    <!-- 招待コードない場合 //-->
+                    <!-- ビジターの場合 //-->
+                    <?php if ($_POST['pass'] == 1) : ?>
                     <tr>
-                        <td class="td-left">プレミアムパス</td>
-                        <td class="td-right">29,800円</td>
+                        <td class="td-left">ビジターパス</td>
+                        <td class="td-right">0円</td>
                     </tr>
-
-                    <!-- 招待コードある場合 //-->
+                    <!-- 招待コードの場合 //-->
+                    <?php else : ?>
                     <tr>
                         <td class="td-left" style="padding-bottom:0;">プレミアムパス(招待)</td>
                         <td class="td-right" style="padding-bottom:0;">0円</td>
                     </tr>
                     <tr>
-                        <td colspan="2">　└ 招待コード： 123456</td>
+                        <td colspan="2">　└ 招待コード： <?php echo $_POST['code'] ?></td>
                     </tr>
-
+                    <?php endif; ?>
                 </table>
             </div>
         </article>
@@ -56,38 +57,50 @@
 
                 <h3>会社名</h3>
                 <div class="single confirm">
-                    株式会社ネクストマーケティング
+                    <?php if ($_POST['company'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['company'] ?>
+                    <?php endif; ?>
                 </div>
                 <h3>部署名</h3>
                 <div class="single confirm">
-                    メディア戦略部
+                    <?php if ($_POST['department'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['department'] ?>
+                    <?php endif; ?>
                 </div>
                 <h3>役職名</h3>
                 <div class="single confirm">
-                    <span>未入力</span>
+                    <?php if ($_POST['position'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['position'] ?>
+                    <?php endif; ?>
                 </div>
 
                 <h3>ご利用者氏名</h3>
                 <div class="double confirm">
-                    一二三 四五郎
+                    <?php echo $_POST['first_name']." ".$_POST['last_name'] ?>
                 </div>
                 <h3>ご利用者氏名(よみ)</h3>
                 <div class="double confirm">
-                    ひふみ しごろう
+                    <?php echo $_POST['first_name_hiragana']." ".$_POST['last_name_hiragana'] ?>
                 </div>
                 <h3>メールアドレス</h3>
                 <div class="single confirm">
-                    sample@example.co.jp
+                    <?php echo $_POST['email'] ?>
                 </div>
 
                 <h3>電話番号</h3>
                 <div class="single confirm">
-                    0355551234
+                    <?php echo $_POST['tel']?>
                 </div>
 
                 <h3>属性</h3>
                 <div class="single confirm singles-height mb20">
-                    アプリ事業者：ゲーム
+                    <?php echo $_POST['attribute']?>
                 </div>
             </div>
 

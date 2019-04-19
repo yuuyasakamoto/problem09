@@ -30,16 +30,16 @@
             <div class="position-basic mb45">
                 <table class="form01">
                     <tr>
-                        <td class="td-left"><label><input type="radio" name="pass" value="プレミアムパス"> プレミアムパス</label></td>
+                        <td class="td-left"><label><input type="radio" name="pass" value=4>プレミアムパス</label></td>
                         <td class="td-right">29,800円</td>
                     </tr>
                     <tr>
-                        <td class="td-left" style="padding-bottom:0;"><label><input type="radio" name="pass" value="プレミアムパス(招待)"> プレミアムパス(招待)</label></td>
+                        <td class="td-left" style="padding-bottom:0;"><label><input type="radio" name="pass" value=5> プレミアムパス(招待)</label></td>
                         <td class="td-right" style="padding-bottom:0;">0円</td>
                     </tr>
                     <tr>
                         <td colspan="2">　└ 招待コード <input type="text" class="invite-code" name="code" placeholder="招待コードを入力"/>
-                            <span class="error-type01">※招待コードが違います。</span></td>
+                            <span class="error-type01"><?php if (isset($_GET['applicant_code'])){ echo "※招待コードが違います。";}?></span></td>
                         <span class="error-type01"><?php echo form_error('pass'); ?></span>
                     </tr>
                 </table>

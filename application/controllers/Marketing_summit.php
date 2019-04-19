@@ -11,17 +11,24 @@ class Marketing_summit extends CI_Controller
      */
     public function ticket_a()
     {
+        //ビジターパス(1)
+        //アプリプレミアムパス(2)
+        //アプリ招待パス(3)
+        //その他プレミアムパス(4)
+        //その他招待パス(5)
         $this->form_validation->set_message('required', '※%sをしてください。');
         $this->form_validation->set_rules('pass', 'パスの選択', 'required');
         if ($this->form_validation->run() === true) {
-        $applicants['pass'] = $this->input->post('pass');
-            if($applicants['pass'] == "プレミアムパス(招待)") {
+            $pass = $this->input->post('pass');
+            //招待パスを選んだ場合
+            if($pass == 3) {
                 $code = $this->input->post('code');
+                //招待パスのチェック（合っているかと使用済みではないか）
                 $applicant_code = $this->Codes_model->checkCode($code);
                 if ($applicant_code) {
-                    $this->load->view('input', $applicants);
+                    $this->load->view('input');
                 } else {
-                    redirect('/Pass/ticket_a?applicant_code=false');
+                    redirect('/Marketing_summit/ticket_a?applicant_code=false');
                 }
             } 
             $this->load->view('input');
@@ -37,10 +44,19 @@ class Marketing_summit extends CI_Controller
         $this->form_validation->set_message('required', '※%sをしてください。');
         $this->form_validation->set_rules('pass', 'パスの選択', 'required');
         if ($this->form_validation->run() === true) {
-            $application['pass'] = $this->input->post('pass');
-            $code = $this->input->post('code');
-            echo $code;
-            $this->load->view('input', $application);
+            $applicants['pass'] = $this->input->post('pass');
+            //招待パスを選んだ場合
+            if($applicants['pass'] == 5) {
+                $applicants['code'] = $this->input->post('code');
+                //招待パスのチェック（合っているかと使用済みではないか）
+                $applicant_code = $this->Codes_model->checkCode($applicants['code']);
+                if ($applicant_code) {
+                    $this->load->view('input', $applicants);
+                } else {
+                    redirect('/Marketing_summit/ticket_b?applicant_code=false');
+                }
+            } 
+            $this->load->view('input', $applicants);
         } else {
             $this->load->view('ticket_b');
         }
@@ -52,19 +68,26 @@ class Marketing_summit extends CI_Controller
         $this->form_validation->set_message('valid_email', '会社のメールアドレスを記入してください');
         $this->form_validation->set_message('min_length', '電話番号を入力してください。※ハイフンなし');
         $this->form_validation->set_message('max_length', '電話番号を入力してください。※ハイフンなし');
-        $this->form_validation->set_rules('company', '会社名', 'required');
-        $this->form_validation->set_rules('department', '部署名', 'required');
-        $this->form_validation->set_rules('position', '役職名', 'required');
         $this->form_validation->set_rules('first_name', '姓', 'required|callback_kanzi_check');
         $this->form_validation->set_rules('last_name', '名', 'required|callback_kanzi_check');
         $this->form_validation->set_rules('first_name_hiragana', 'せい', 'required|callback_hiragana_check');
         $this->form_validation->set_rules('last_name_hiragana', 'めい', 'required|callback_hiragana_check');
         $this->form_validation->set_rules('email', 'メールアドレス', 'required|valid_email');
-        $this->form_validation->set_rules('tel', '電話番号', 'min_length[10]|max_length[11]');
+        $this->form_validation->set_rules('tel', '電話番号', 'required|min_length[10]|max_length[11]');
         $this->form_validation->set_rules('attribute', '属性', 'required');
-        //バリデーションエラーが無かった時確認画面へ
-        if ($this->form_validation->run() === true) {
-            
+        //セッションのバリデーション
+        $session01 = $this->input->post('session01');
+        $session02 = $this->input->post('session02');
+        $session03 = $this->input->post('session03');
+        $_POST['session'] = $session01.$session02.$session03;
+        $this->form_validation->set_rules('session', 'セッション', 'callback_session_check');
+        //バリデーションエラーが無く有料パスの場合支払い画面へ
+        if ($this->form_validation->run() === true && $this->input->post('pass') == 2 ||$this->input->post('pass') == 4) {
+            $this->load->view('check');
+        //バリデーションが無く支払い必要の無いパスの場合
+        } elseif ($this->form_validation->run() === true && $this->input->post('pass') == 1 ||$this->input->post('pass') == 3 ||$this->input->post('pass') == 5) {
+            $this->load->view('check_free');
+        //バリデーションエラーの場合もう一度
         } else {
             $this->load->view('input');
         }
@@ -97,6 +120,20 @@ class Marketing_summit extends CI_Controller
         } else {
             $this->form_validation->set_message('kanzi_check', '漢字で入力して下さい');
             return false;
+        }
+    }
+    /**
+     * セッション選択しているかチェック
+     * @param string $session
+     * @return boolean
+     */
+    public function session_check(string $session)
+    {
+        if ($session == "") {
+            $this->form_validation->set_message('session_check', 'セッションを選択してください');
+            return FALSE;
+        } else {
+            return TRUE;
         }
     }
 }

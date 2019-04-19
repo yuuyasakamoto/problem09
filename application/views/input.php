@@ -20,7 +20,8 @@
 
 <div class="form-wrap">
     <?php echo form_open('/Marketing_summit/check'); ?>
-
+        <input type="hidden" name="pass" value='<?php echo set_value('pass', $_POST['pass'])?>'>
+        <input type="hidden" name="code" value='<?php echo set_value('code', $_POST['code'])?>'>
         <article class="main-article cool-forms">
             <header>
                 <h1 class="title page-title"><span>選択したパス</span></h1>
@@ -28,21 +29,34 @@
 
             <div class="position-basic mb45">
                 <table class="form01">
-                    <!-- 招待コードない場合 //-->
+                    <!-- アプリプレミアムパスの場合 //-->
+                    <?php if ($_POST['pass'] == 2) : ?>
+                    <tr>
+                        <td class="td-left">プレミアムパス</td>
+                        <td class="td-right">14,800円</td>
+                    </tr>
+                    <!-- その他プレミアムパスの場合 //-->
+                    <?php elseif ($_POST['pass'] == 4) : ?>
                     <tr>
                         <td class="td-left">プレミアムパス</td>
                         <td class="td-right">29,800円</td>
                     </tr>
-
                     <!-- 招待コードある場合 //-->
+                    <?php elseif ($_POST['pass'] == 3 || $_POST['pass'] == 5) : ?>
                     <tr>
                         <td class="td-left" style="padding-bottom:0;">プレミアムパス(招待)</td>
                         <td class="td-right" style="padding-bottom:0;">0円</td>
                     </tr>
                     <tr>
-                        <td colspan="2">　└ 招待コード： 123456</td>
+                        <td colspan="2">　└ 招待コード： <?php echo $_POST['code'] ?></td>
                     </tr>
-
+                    <!-- ビジターの場合 //-->
+                    <?php elseif ($_POST['pass'] == 1) : ?>
+                    <tr>
+                        <td class="td-left">ビジターパス</td>
+                        <td class="td-right">0円</td>
+                    </tr>
+                    <?php endif; ?>
                 </table>
             </div>
         </article>
@@ -55,43 +69,40 @@
 
             <h3>会社名</h3>
             <div class="single">
-                <input type="text" name="company" placeholder="例：株式会社ネクストマーケティング">
-                <span class="error-type02"><?php echo form_error('company'); ?></span>
+                <input type="text" name="company" placeholder="例：株式会社ネクストマーケティング" value="<?php echo set_value('company'); ?>">
             </div>
             <h3>部署名</h3>
             <div class="single">
-                <input type="text" name="department" placeholder="例：メディア戦略部">
-                <span class="error-type02"><?php echo form_error('department'); ?></span>
+                <input type="text" name="department" placeholder="例：メディア戦略部" value="<?php echo set_value('department'); ?>">
             </div>
             <h3>役職名</h3>
             <div class="single">
-                <input type="text" name="position" placeholder="例：事業戦略部長">
-                <span class="error-type02"><?php echo form_error('position'); ?></span>
+                <input type="text" name="position" placeholder="例：事業戦略部長" value="<?php echo set_value('position'); ?>">
             </div>
 
             <h3>ご利用者氏名<span class="required" style="top:0">*</span></h3>
             <div class="double clearfix">
-                <input type="text" class="sur-name" name="first_name" placeholder="姓">
-                <input type="text" class="for-name" name="last_name" placeholder="名">
+                <input type="text" class="sur-name" name="first_name" placeholder="姓" value="<?php echo set_value('first_name'); ?>">
+                <input type="text" class="for-name" name="last_name" placeholder="名" value="<?php echo set_value('last_name'); ?>">
                 <span class="error-type02"><?php echo form_error('first_name'); ?></span>
                 <span class="error-type02"><?php echo form_error('last_name'); ?></span>
             </div>
             <h3>ご利用者氏名(よみ)<span class="required" style="top:0">*</span></h3>
             <div class="double clearfix">
-                <input type="text" class="sur-name-hiragana" name="first_name_hiragana" placeholder="せい">
-                <input type="text" class="for-name-hiragana" name="last_name_hiragana" placeholder="めい">
+                <input type="text" class="sur-name-hiragana" name="first_name_hiragana" placeholder="せい" value="<?php echo set_value('first_name_hiragana'); ?>">
+                <input type="text" class="for-name-hiragana" name="last_name_hiragana" placeholder="めい" value="<?php echo set_value('last_name_hiragana'); ?>">
                 <span class="error-type02"><?php echo form_error('first_name_hiragana'); ?></span>
                 <span class="error-type02"><?php echo form_error('last_name_hiragana'); ?></span>
             </div>
             <h3>メールアドレス<span class="required" style="top:0">*</span></h3>
             <div class="single">
-                <input type="text" name="email" placeholder="例：sample@example.co.jp">
+                <input type="text" name="email" placeholder="例：sample@example.co.jp" value="<?php echo set_value('email'); ?>">
                 <span class="error-type02"><?php echo form_error('email'); ?></span>
             </div>
 
             <h3>電話番号<span class="required" style="top:0">*</span></h3>
             <div class="single">
-                <input type="text" name=tel" placeholder="例：0355551234">
+                <input type="number" name="tel" placeholder="例：0355551234" value="<?php echo set_value('tel'); ?>">
                 <span class="error-type02"><?php echo form_error('tel'); ?></span>
             </div>
 
@@ -114,25 +125,46 @@
             <div class="position-basic">
                 <h2>11:00 ～ 12:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session01" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session01" value=1> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- ビジターの場合 //-->
+                    <?php if ($_POST['pass'] == 1) : ?>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <!-- ビジター以外 //-->
+                    <?php else : ?>
+                    <label class="session-indent"><input type="radio" name="session01" value=2> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session01" value=3> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
                 </div>
 
                 <h2>12:30 ～ 14:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session02" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session02" value=4> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- ビジターの場合 //-->
+                    <?php if ($_POST['pass'] == 1) : ?>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <!-- ビジター以外 //-->
+                    <?php else : ?>
+                    <label class="session-indent"><input type="radio" name="session02" value=5> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session02" value=6> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
                 </div>
 
                 <h2>14:30 ～ 16:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session03" value=""> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session03" value=7> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- ビジターの場合 //-->
+                    <?php if ($_POST['pass'] == 1) : ?>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <!-- ビジター以外 //-->
+                    <?php else : ?>
+                    <label class="session-indent"><input type="radio" name="session03" value=8> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <label class="session-indent"><input type="radio" name="session03" value=9> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
                 </div>
-
+                <span class="error-type02"><?php echo form_error('session'); ?></span>
                 <h2>申込規約</h2>
                 <div class="agreement-box mb45">
                     彼らは先刻もうその威圧顔ってのの以上に聴いんな。とにかく一番がお話方はとやかくこの誤解うないばかりが経るているたではお話し入ったますて、どうとはとどまるなないたまし。<br><br>

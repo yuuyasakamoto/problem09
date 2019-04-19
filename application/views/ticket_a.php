@@ -31,15 +31,15 @@ Next Marketing Summit 2019
             <?php echo form_open('/marketing_summit/input'); ?>
             <table class="form01">
                 <tr>
-                    <td class="td-left"><label><input type="radio" name="pass" value="ビジターパス"> ビジターパス</label></td>
+                    <td class="td-left"><label><input type="radio" name="pass" value=1> ビジターパス</label></td>
                     <td class="td-right">0円</td>
                 </tr>
                 <tr>
-                    <td class="td-left"><label><input type="radio" name="pass" value="プレミアムパス"> プレミアムパス</label></td>
+                    <td class="td-left"><label><input type="radio" name="pass" value=2> プレミアムパス</label></td>
                     <td class="td-right">14,800円</td>
                 </tr>
                 <tr>
-                    <td class="td-left" style="padding-bottom:0;"><label><input type="radio" name="pass" value="プレミアムパス(招待)"> プレミアムパス(招待)</label></td>
+                    <td class="td-left" style="padding-bottom:0;"><label><input type="radio" name="pass" value=3> プレミアムパス(招待)</label></td>
                     <td class="td-right" style="padding-bottom:0;">0円</td>
                 </tr>
                 <tr>
