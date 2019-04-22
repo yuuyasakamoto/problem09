@@ -14,5 +14,9 @@ class Codes_model extends CI_Model
             return FALSE;
         }
     }
+    public function usedCode(string $code)
+    {
+            $this->db->query("UPDATE codes SET void = void + 1 WHERE code='$code'");
+    }
 }
 

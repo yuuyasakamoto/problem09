@@ -14,8 +14,6 @@ class Marketing_summit extends CI_Controller
         //ビジターパス(1)
         //アプリプレミアムパス(2)
         //アプリ招待パス(3)
-        //その他プレミアムパス(4)
-        //その他招待パス(5)
         $this->form_validation->set_message('required', '※%sをしてください。');
         $this->form_validation->set_rules('pass', 'パスの選択', 'required');
         if ($this->form_validation->run() === true) {
@@ -41,6 +39,8 @@ class Marketing_summit extends CI_Controller
      */
     public function ticket_b()
     {
+        //その他プレミアムパス(4)
+        //その他招待パス(5)
         $this->form_validation->set_message('required', '※%sをしてください。');
         $this->form_validation->set_rules('pass', 'パスの選択', 'required');
         if ($this->form_validation->run() === true) {
@@ -84,13 +84,43 @@ class Marketing_summit extends CI_Controller
         //バリデーションエラーが無く有料パスの場合支払い画面へ
         if ($this->form_validation->run() === true && $this->input->post('pass') == 2 ||$this->input->post('pass') == 4) {
             $this->load->view('check');
-        //バリデーションが無く支払い必要の無いパスの場合
+        //バリデーションエラーが無く支払い必要の無いパスの場合
         } elseif ($this->form_validation->run() === true && $this->input->post('pass') == 1 ||$this->input->post('pass') == 3 ||$this->input->post('pass') == 5) {
-            $this->load->view('check_free');
+            $sessions = $this->Sessions_model->getSessions($session01, $session02, $session03);
+            foreach($sessions as $session) {
+            //time_idに紐づいた時間帯を取得
+            $session_time = $this->Times_model->findById($session->time_id);
+            $session->time_id = $session_time;
+        }
+            $data['sessions'] = $sessions;
+            $this->load->view('check_free', $data);
         //バリデーションエラーの場合もう一度
         } else {
             $this->load->view('input');
         }
+    }
+    public function complete()
+    {
+        $code = $this->input->post('code');
+        if ($code) {
+            //使用済みコードフラグ追加
+            $this->Codes_model->usedCode($code);
+        }
+        var_dump($code);
+        $pass = $this->input->post('pass');
+        //パスに応じた申し込みIDの取得
+        $applicants_id = $this->Applicant_ids_model->getApplicantId($pass, $code);
+        $company = $this->input->post('company');
+        $department = $this->input->post('department');
+        $position = $this->input->post('position');
+        $first_name = $this->input->post('first_name');
+        $last_name = $this->input->post('last_name');
+        $first_name_hiragana = $this->input->post('first_name_hiragana');
+        $last_name_hiragana = $this->input->post('last_name_hiragana');
+        $email = $this->input->post('email');
+        $tel = $this->input->post('tel');
+        $attribute = $this->input->post('attribute');
+        $this->load->view('complete');
     }
     /**
      * ひらがなチェック

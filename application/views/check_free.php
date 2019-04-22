@@ -20,8 +20,8 @@
 </div>
 
 <div class="form-wrap">
-    <form>
-
+    <?php echo form_open('/Marketing_summit/complete'); ?>
+    <?php echo form_hidden('pass', $_POST['pass']) ?>
         <article class="main-article cool-forms">
             <header>
                 <h1 class="title page-title"><span>選択したパス</span></h1>
@@ -44,6 +44,7 @@
                     <tr>
                         <td colspan="2">　└ 招待コード： <?php echo $_POST['code'] ?></td>
                     </tr>
+                    <?php echo form_hidden('code', $_POST['code']) ?>
                     <?php endif; ?>
                 </table>
             </div>
@@ -63,6 +64,7 @@
                     <?php echo $_POST['company'] ?>
                     <?php endif; ?>
                 </div>
+                <?php echo form_hidden('company', $_POST['company']) ?>
                 <h3>部署名</h3>
                 <div class="single confirm">
                     <?php if ($_POST['department'] == "") : ?>
@@ -71,6 +73,7 @@
                     <?php echo $_POST['department'] ?>
                     <?php endif; ?>
                 </div>
+                <?php echo form_hidden('department', $_POST['department']) ?>
                 <h3>役職名</h3>
                 <div class="single confirm">
                     <?php if ($_POST['position'] == "") : ?>
@@ -79,29 +82,34 @@
                     <?php echo $_POST['position'] ?>
                     <?php endif; ?>
                 </div>
-
+                <?php echo form_hidden('position', $_POST['position']) ?>
                 <h3>ご利用者氏名</h3>
                 <div class="double confirm">
                     <?php echo $_POST['first_name']." ".$_POST['last_name'] ?>
                 </div>
+                <?php echo form_hidden('first_name', $_POST['first_name']) ?>
+                <?php echo form_hidden('last_name', $_POST['last_name']) ?>
                 <h3>ご利用者氏名(よみ)</h3>
                 <div class="double confirm">
                     <?php echo $_POST['first_name_hiragana']." ".$_POST['last_name_hiragana'] ?>
                 </div>
+                <?php echo form_hidden('first_name_hiragana', $_POST['first_name_hiragana']) ?>
+                <?php echo form_hidden('last_name_hiragana', $_POST['last_name_hiragana']) ?>
                 <h3>メールアドレス</h3>
                 <div class="single confirm">
                     <?php echo $_POST['email'] ?>
                 </div>
-
+                <?php echo form_hidden('email', $_POST['email']) ?>
                 <h3>電話番号</h3>
                 <div class="single confirm">
                     <?php echo $_POST['tel']?>
                 </div>
-
+                <?php echo form_hidden('tel', $_POST['tel']) ?>
                 <h3>属性</h3>
                 <div class="single confirm singles-height mb20">
                     <?php echo $_POST['attribute']?>
                 </div>
+                <?php echo form_hidden('attribute', $_POST['attribute']) ?>
             </div>
 
 
@@ -109,15 +117,17 @@
                 <h1 class="title page-title"><span>選択したセッション</span></h1>
             </header>
             <div class="position-basic">
-                <h2>11:00 ～ 12:00</h2>
-                <div class="single singles-height mb45">
-                    <span class="confirm"><strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</span>
-                </div>
+            <?php foreach ($sessions as $session) : ?>
 
-                <h2>12:30 ～ 14:00</h2>
+                <h2><?php echo $session->time_id ?></h2>
                 <div class="single singles-height mb45">
-                    <span class="confirm"><strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</span> <span class="admission-fee">プレミアム</span>
+                <span class="confirm"><strong><?php echo $session->meeting_place ?></strong><?php echo $session->contents ?></span>
                 </div>
+                <?php if ($session->meeting_place == "A会場"): ?>
+                    <span class="admission-fee">プレミアム</span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+                
             </div>
 
             <header>
@@ -130,12 +140,8 @@
             </div>
 
             <div class="tc">
-                <input type="button" class="submit" name="back" value="修正する">
-                <input type="submit" class="submit-button" name="submit" value="申し込む">
-
-
-<a href="" class="submit">修正する</a>
-                <a href="" class="submit">申し込む</a>
+                <a href="javascript:history.back()" class="submit">修正する</a>
+                <input type="submit" class="submit-button" value="申し込む">
             </div>
         </article>
     </form>
