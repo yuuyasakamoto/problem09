@@ -51,7 +51,7 @@
         <!-- 両 注意文はここまで //-->
 
         <div class="tc">
-            <a href="">Next Marketing Summit 2019のトップへ戻る</a>
+            <a href="/Marketing_summit/index">Next Marketing Summit 2019のトップへ戻る</a>
         </div>
 
     </article>

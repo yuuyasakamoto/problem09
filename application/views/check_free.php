@@ -20,7 +20,7 @@
 </div>
 
 <div class="form-wrap">
-    <?php echo form_open('/Marketing_summit/complete'); ?>
+    <?php echo form_open('/Marketing_summit/free_complete'); ?>
     <?php echo form_hidden('pass', $_POST['pass']) ?>
         <article class="main-article cool-forms">
             <header>
@@ -111,8 +111,9 @@
                 </div>
                 <?php echo form_hidden('attribute', $_POST['attribute']) ?>
             </div>
-
-
+            <?php echo form_hidden('session01', $session01) ?>
+            <?php echo form_hidden('session02', $session02) ?>
+            <?php echo form_hidden('session03', $session03) ?>
             <header>
                 <h1 class="title page-title"><span>選択したセッション</span></h1>
             </header>

@@ -39,8 +39,8 @@
 </div>
 
 <div class="form-wrap">
-    <form>
-
+    <?php echo form_open('/Marketing_summit/pay_complete'); ?>
+    <?php echo form_hidden('pass', $_POST['pass']) ?>
         <article class="main-article cool-forms">
             <header>
                 <h1 class="title page-title"><span>選択したパス</span></h1>
@@ -48,21 +48,19 @@
 
             <div class="position-basic mb45">
                 <table class="form01">
-                    <!-- 招待コードない場合 //-->
+                    <!-- アプリプレミアムパスの場合 //-->
+                    <?php if ($_POST['pass'] == 2) : ?>
                     <tr>
                         <td class="td-left">プレミアムパス</td>
-                        <td class="td-right">29,800円</td>
+                        <td class="td-right">14,800円</td>
                     </tr>
-
-                    <!-- 招待コードある場合 //-->
+                    <!-- その他プレミアムパスの場合 //-->
+                    <?php elseif ($_POST['pass'] == 4) : ?>
                     <tr>
-                        <td class="td-left" style="padding-bottom:0;">プレミアムパス(招待)</td>
-                        <td class="td-right" style="padding-bottom:0;">0円</td>
+                        <td class="td-left" style="padding-bottom:0;">プレミアムパス</td>
+                        <td class="td-right" style="padding-bottom:0;">29,800円</td>
                     </tr>
-                    <tr>
-                        <td colspan="2">　└ 招待コード： 123456</td>
-                    </tr>
-
+                    <?php endif; ?>
                 </table>
             </div>
         </article>
@@ -75,60 +73,77 @@
 
                 <h3>会社名</h3>
                 <div class="single confirm">
-                    株式会社ネクストマーケティング
+                    <?php if ($_POST['company'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['company'] ?>
+                    <?php endif; ?>
                 </div>
+                <?php echo form_hidden('company', $_POST['company']) ?>
                 <h3>部署名</h3>
                 <div class="single confirm">
-                    メディア戦略部
+                   <?php if ($_POST['department'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['department'] ?>
+                    <?php endif; ?>
                 </div>
+                <?php echo form_hidden('department', $_POST['department']) ?>
                 <h3>役職名</h3>
                 <div class="single confirm">
-                    <span>未入力</span>
+                    <?php if ($_POST['position'] == "") : ?>
+                    未入力
+                    <?php else : ?>
+                    <?php echo $_POST['position'] ?>
+                    <?php endif; ?>
                 </div>
-
+                <?php echo form_hidden('position', $_POST['position']) ?>               
                 <h3>ご利用者氏名</h3>
                 <div class="double confirm">
-                    一二三 四五郎
+                   <?php echo $_POST['first_name']." ".$_POST['last_name'] ?>
                 </div>
+                <?php echo form_hidden('first_name', $_POST['first_name']) ?>
+                <?php echo form_hidden('last_name', $_POST['last_name']) ?>
                 <h3>ご利用者氏名(よみ)</h3>
                 <div class="double confirm">
-                    ひふみ しごろう
+                    <?php echo $_POST['first_name_hiragana']." ".$_POST['last_name_hiragana'] ?>
                 </div>
+                <?php echo form_hidden('first_name_hiragana', $_POST['first_name_hiragana']) ?>
+                <?php echo form_hidden('last_name_hiragana', $_POST['last_name_hiragana']) ?>
                 <h3>メールアドレス</h3>
                 <div class="single confirm">
-                    sample@example.co.jp
+                     <?php echo $_POST['email'] ?>
                 </div>
-
+                <?php echo form_hidden('email', $_POST['email']) ?>
                 <h3>電話番号</h3>
                 <div class="single confirm">
-                    0355551234
+                    <?php echo $_POST['tel']?>
                 </div>
-
+                <?php echo form_hidden('tel', $_POST['tel']) ?>
                 <h3>属性</h3>
                 <div class="single confirm singles-height mb20">
-                    アプリ事業者：ゲーム
+                    <?php echo $_POST['attribute']?>
                 </div>
-
+                <?php echo form_hidden('attribute', $_POST['attribute']) ?>
             </div>
-
-
+            <?php echo form_hidden('session01', $_POST['session01']) ?>
+            <?php echo form_hidden('session02', $_POST['session02']) ?>
+            <?php echo form_hidden('session03', $_POST['session03']) ?>
             <header>
                 <h1 class="title page-title"><span>選択したセッション</span></h1>
             </header>
             <div class="position-basic">
-                <h2>11:00 ～ 12:00</h2>
+                <?php foreach ($sessions as $session) : ?>
+                <h2><?php echo $session->time_id ?></h2>
                 <div class="single singles-height mb45">
-                    <span class="confirm"><strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</span>
+                <span class="confirm"><strong><?php echo $session->meeting_place ?></strong><?php echo $session->contents ?></span>
                 </div>
-
-                <h2>12:30 ～ 14:00</h2>
-                <div class="single singles-height mb45">
-                    <span class="confirm"><strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</span> <span class="admission-fee">プレミアム</span>
-                </div>
-
-
+                <?php if ($session->meeting_place == "A会場"): ?>
+                    <span class="admission-fee">プレミアム</span>
+                <?php endif; ?>
+                <?php endforeach; ?>
                 <div class="tc">
-                    <input type="button" class="submit" name="back" value="修正する">
+                    <a href="javascript:history.back()" class="submit">修正する</a>
                 </div>
 
             </div>
@@ -139,14 +154,20 @@
             <div class="position-basic">
                 <h2>お支払い方法</h2>
                 <div class="single singles-height mb20">
-                    <label><input type="radio" class="credit-radio" name="sample02" value=""> クレジットカード</label>  <img src="./img/viza.png" title="VISA" class="credit-icon-v-min" /><img src="./img/master.png" title="Mastercard" class="credit-icon-m-min" /><br />
-                    <label><input type="radio" class="invoice-radio" name="sample02" value=""> 請求書</label><br />
+                    <label><input type="radio" class="credit-radio" name="payment" value="クレジットカード" <?php if(set_value('payment') == "クレジットカード"){ print "checked";}?>> クレジットカード</label>  <img src="./img/viza.png" title="VISA" class="credit-icon-v-min" /><img src="./img/master.png" title="Mastercard" class="credit-icon-m-min" /><br />
+                    <label><input type="radio" class="invoice-radio" name="payment" value="請求書" <?php if(set_value('payment') == "請求書"){ print "checked";}?>> 請求書</label><br />
                 </div>
 
                 <div class="credit-use">
                     <h2>お支払い金額</h2>
                     <div class="single singles-height">
-                        <span class="pay-total">2,488,000 円</span>
+                         <!-- アプリプレミアムパスの場合 //-->
+                        <?php if ($_POST['pass'] == 2) : ?>
+                            <span class="pay-total">14,800円</span>
+                        <!-- その他プレミアムパスの場合 //-->
+                        <?php elseif ($_POST['pass'] == 4) : ?>
+                            <span class="pay-total">29,800円</span>
+                        <?php endif; ?>
                     </div>
 
                     <h2>クレジットカード番号</h2>
@@ -170,12 +191,19 @@
                 <div class="invoice-use">
                     <h2>お支払い金額</h2>
                     <div class="single singles-height">
-                        <span class="pay-total">2,488,000 円</span>
+                        <!-- アプリプレミアムパスの場合 //-->
+                        <?php if ($_POST['pass'] == 2) : ?>
+                            <span class="pay-total">14,800円</span>
+                        <!-- その他プレミアムパスの場合 //-->
+                        <?php elseif ($_POST['pass'] == 4) : ?>
+                            <span class="pay-total">29,800円</span>
+                        <?php endif; ?>                   
                     </div>
 
                     <h2>請求書・領収書宛名(カード名義と共通でなくてかまいません)</h2>
                     <div class="single singles-height">
-                        <input type="text" name="" placeholder="例：株式会社ネクストマーケティング">
+                        <input type="text" name="receipt_address" placeholder="例：株式会社ネクストマーケティング">
+                        <span class="error-type02"><?php echo form_error('receipt_address'); ?></span>
                     </div>
                 </div>
 
