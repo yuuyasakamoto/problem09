@@ -10,7 +10,6 @@ class Marketing_summit extends CI_Controller
      */
     public function index()
     {
-        
         $this->load->view('index');
     }
     /**
@@ -21,6 +20,15 @@ class Marketing_summit extends CI_Controller
         //ビジターパス(1)
         //アプリプレミアムパス(2)
         //アプリ招待パス(3)
+        $data['check01'] = $this->Session_applicants_model->capacityCheck01();
+        $data['check02'] = $this->Session_applicants_model->capacityCheck02();
+        $data['check03'] = $this->Session_applicants_model->capacityCheck03();
+        $data['check04'] = $this->Session_applicants_model->capacityCheck04();
+        $data['check05'] = $this->Session_applicants_model->capacityCheck05();
+        $data['check06'] = $this->Session_applicants_model->capacityCheck06();
+        $data['check07'] = $this->Session_applicants_model->capacityCheck07();
+        $data['check08'] = $this->Session_applicants_model->capacityCheck08();
+        $data['check09'] = $this->Session_applicants_model->capacityCheck09();
         $this->form_validation->set_message('required', '※%sをしてください。');
         $this->form_validation->set_rules('pass', 'パスの選択', 'required');
         if ($this->form_validation->run() === true) {
@@ -31,12 +39,12 @@ class Marketing_summit extends CI_Controller
                 //招待パスのチェック（合っているかと使用済みではないか）
                 $applicant_code = $this->Codes_model->checkCode($code);
                 if ($applicant_code) {
-                    $this->load->view('input');
+                    $this->load->view('input', $data);
                 } else {
                     redirect('/Marketing_summit/ticket_a?applicant_code=false');
                 }
             } 
-            $this->load->view('input');
+            $this->load->view('input', $data);
         } else {
             $this->load->view('ticket_a');
         }
@@ -46,6 +54,15 @@ class Marketing_summit extends CI_Controller
      */
     public function ticket_b()
     {
+        $data['check01'] = $this->Session_applicants_model->capacityCheck01();
+        $data['check02'] = $this->Session_applicants_model->capacityCheck02();
+        $data['check03'] = $this->Session_applicants_model->capacityCheck03();
+        $data['check04'] = $this->Session_applicants_model->capacityCheck04();
+        $data['check05'] = $this->Session_applicants_model->capacityCheck05();
+        $data['check06'] = $this->Session_applicants_model->capacityCheck06();
+        $data['check07'] = $this->Session_applicants_model->capacityCheck07();
+        $data['check08'] = $this->Session_applicants_model->capacityCheck08();
+        $data['check09'] = $this->Session_applicants_model->capacityCheck09();
         //その他プレミアムパス(4)
         //その他招待パス(5)
         $this->form_validation->set_message('required', '※%sをしてください。');
@@ -58,18 +75,27 @@ class Marketing_summit extends CI_Controller
                 //招待パスのチェック（合っているかと使用済みではないか）
                 $applicant_code = $this->Codes_model->checkCode($applicants['code']);
                 if ($applicant_code) {
-                    $this->load->view('input');
+                    $this->load->view('input', $data);
                 } else {
                     redirect('/Marketing_summit/ticket_b?applicant_code=false');
                 }
             } 
-            $this->load->view('input');
+            $this->load->view('input', $data);
         } else {
             $this->load->view('ticket_b');
         }
     }
     public function check()
     {
+        $data['check01'] = $this->Session_applicants_model->capacityCheck01();
+        $data['check02'] = $this->Session_applicants_model->capacityCheck02();
+        $data['check03'] = $this->Session_applicants_model->capacityCheck03();
+        $data['check04'] = $this->Session_applicants_model->capacityCheck04();
+        $data['check05'] = $this->Session_applicants_model->capacityCheck05();
+        $data['check06'] = $this->Session_applicants_model->capacityCheck06();
+        $data['check07'] = $this->Session_applicants_model->capacityCheck07();
+        $data['check08'] = $this->Session_applicants_model->capacityCheck08();
+        $data['check09'] = $this->Session_applicants_model->capacityCheck09();
         //入力された値のバリデーションチェック
         $this->form_validation->set_message('required', '%s を入力して下さい。');
         $this->form_validation->set_message('valid_email', '会社のメールアドレスを記入してください');
@@ -110,7 +136,7 @@ class Marketing_summit extends CI_Controller
             $this->load->view('check_free', $data);
         //バリデーションエラーの場合もう一度
         } else {
-            $this->load->view('input');
+            $this->load->view('input', $data);
         }
     }
     public function free_complete()

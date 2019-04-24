@@ -125,43 +125,94 @@
             <div class="position-basic">
                 <h2>11:00 ～ 12:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session01" value=1 <?php if(set_value('session01') == 1){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <!-- ビジターの場合 //-->
+                    <!-- A会場空席あり //-->
+                    <?php if ($check01 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session01" value=1 <?php if(set_value('session01') == 1){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- A会場空席なし //-->
+                    <?php elseif ($check01 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <?php endif; ?>
+                    <!-- ビジターの場合選択不可 //-->
                     <?php if ($_POST['pass'] == 1) : ?>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <?php endif; ?>
                     <!-- ビジター以外 //-->
-                    <?php else : ?>
-                    <label class="session-indent"><input type="radio" name="session01" value=2 <?php if(set_value('session01') == 2){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session01" value=3 <?php if(set_value('session01') == 3){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check02 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session01" value=2 <?php if(set_value('session01') == 2){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check02 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
+                    <!-- C会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check03 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session01" value=3 <?php if(set_value('session01') == 3){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- C会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check03 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                     <?php endif; ?>
                 </div>
 
                 <h2>12:30 ～ 14:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session02" value=4 <?php if(set_value('session02') == 4){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <!-- ビジターの場合 //-->
+                    <!-- A会場空席あり //-->
+                    <?php if ($check04 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session02" value=4 <?php if(set_value('session02') == 4){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- A会場空席なし //-->
+                    <?php elseif ($check04 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <?php endif; ?>
+                    <!-- ビジターの場合選択不可 //-->
                     <?php if ($_POST['pass'] == 1) : ?>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <?php endif; ?>
                     <!-- ビジター以外 //-->
-                    <?php else : ?>
-                    <label class="session-indent"><input type="radio" name="session02" value=5 <?php if(set_value('session02') == 5){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session02" value=6 <?php if(set_value('session02') == 6){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check05 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session02" value=5 <?php if(set_value('session02') == 5){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check05 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
+                    <!-- C会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check06 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session02" value=6 <?php if(set_value('session02') == 6){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- C会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check06 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                     <?php endif; ?>
                 </div>
 
                 <h2>14:30 ～ 16:00</h2>
                 <div class="single singles-height mb45">
-                    <label class="session-indent"><input type="radio" name="session03" value=7 <?php if(set_value('session03') == 7){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
-                    <!-- ビジターの場合 //-->
+                    <!-- A会場空席あり //-->
+                    <?php if ($check07 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session03" value=7 <?php if(set_value('session03') == 7){ print "checked";}?>> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <!-- A会場空席なし //-->
+                    <?php elseif ($check07 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>A会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」 <span class="admission-fee">プレミアム</span></label>
+                    <?php endif; ?>
+                    <!-- ビジターの場合選択不可 //-->
                     <?php if ($_POST['pass'] == 1) : ?>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
-                    <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                        <label class="session-indent un-selected"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方</label>
+                    <?php endif; ?>
                     <!-- ビジター以外 //-->
-                    <?php else : ?>
-                    <label class="session-indent"><input type="radio" name="session03" value=8 <?php if(set_value('session03') == 8){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
-                    <label class="session-indent"><input type="radio" name="session03" value=9 <?php if(set_value('session03') == 9){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check08 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session03" value=8 <?php if(set_value('session03') == 8){ print "checked";}?>> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- B会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check08 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>B会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <?php endif; ?>
+                    <!-- C会場空席あり //-->
+                    <?php if ($_POST['pass'] != 1 && $check09 == TRUE) : ?>
+                        <label class="session-indent"><input type="radio" name="session03" value=9 <?php if(set_value('session03') == 9){ print "checked";}?>> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
+                    <!-- C会場空席なし //-->
+                    <?php elseif ($_POST['pass'] != 1 && $check09 == FALSE) : ?>
+                        <label class="session-indent sold-out"><input type="radio" name="" value="" disabled="disabled"> <strong>C会場</strong> ファンを増やす「コミュニティ作り」や「ユーザーとの向き合い方」</label>
                     <?php endif; ?>
                 </div>
                 <span class="error-type02"><?php echo form_error('session'); ?></span>
