@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title></title>
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" >
     <script type="text/javascript"></script>
 </head>
 <body>

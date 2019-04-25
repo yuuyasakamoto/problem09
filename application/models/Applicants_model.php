@@ -3,7 +3,7 @@
 
 class Applicants_model extends CI_Model
 {
-    public function insert(int $pass, string $company, string $department,
+    public function insert(int $pass, string $company = NULL, string $department,
                            string $position, string $first_name, string $last_name, string $first_name_hiragana, 
                            string $last_name_hiragana, string $email, string $tel, string $attribute, string $applicant_id,
                            string $payment = NULL, string $receipt_address = NULL)

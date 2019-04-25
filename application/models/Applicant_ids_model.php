@@ -3,6 +3,9 @@
 
 class Applicant_ids_model extends CI_Model
 {
+    /**
+     * パスに応じた申し込みIDの取得機能
+     */
     public function getApplicantId(int $pass, string $code = NULL)
     {
         //ビシターパス
@@ -17,13 +20,13 @@ class Applicant_ids_model extends CI_Model
             $query = $this->db->query("SELECT * FROM applicant_ids WHERE id=1");
             $applicant_id = $query->row();
             return 'B'.$applicant_id->B;
-        //アプリ招待コード
+        //アプリ招待コード（初期値P以外）
         } elseif ($pass == 3 && substr($code, 0, 1) !== 'P') {
             $this->db->query("UPDATE applicant_ids SET C = C + 1 WHERE id = 1;");
             $query = $this->db->query("SELECT * FROM applicant_ids WHERE id=1");
             $applicant_id = $query->row();
             return 'C'.$applicant_id->C;
-        //アプリパートナー企業の招待コード
+        //アプリパートナー企業の招待コード（初期値P）
         } elseif ($pass == 3 && substr($code, 0, 1) === 'P') {
             $this->db->query("UPDATE applicant_ids SET D = D + 1 WHERE id = 1;");
             $query = $this->db->query("SELECT * FROM applicant_ids WHERE id=1");

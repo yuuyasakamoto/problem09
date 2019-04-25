@@ -126,9 +126,9 @@
                 </div>
                 <?php echo form_hidden('attribute', $_POST['attribute']) ?>
             </div>
-            <?php echo form_hidden('session01', $_POST['session01']) ?>
-            <?php echo form_hidden('session02', $_POST['session02']) ?>
-            <?php echo form_hidden('session03', $_POST['session03']) ?>
+            <?php echo form_hidden('session01', $session01) ?>
+            <?php echo form_hidden('session02', $session02) ?>
+            <?php echo form_hidden('session03', $session03) ?>
             <header>
                 <h1 class="title page-title"><span>選択したセッション</span></h1>
             </header>
