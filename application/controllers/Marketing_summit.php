@@ -97,13 +97,10 @@ class Marketing_summit extends CI_Controller
      */
     public function check()
     {
-        $referer = $_SERVER["HTTP_REFERER"];
-        $url01 = 'http://local.problem09.com/Marketing_summit/ticket_a';
-        $url02 = 'http://local.problem09.com/Marketing_summit/ticket_b';
-        if(!strstr($referer, $url01) || !strstr($referer, $url02)){
-            $this->load->view('error');
-            exit;
-        }
+        if (!isset($_POST['key'])) {
+        echo "エラー発生";
+        exit();
+        } 
         $data['check01'] = $this->Session_applicants_model->capacityCheck01();
         $data['check02'] = $this->Session_applicants_model->capacityCheck02();
         $data['check03'] = $this->Session_applicants_model->capacityCheck03();
@@ -163,6 +160,10 @@ class Marketing_summit extends CI_Controller
      */
     public function free_complete()
     {
+        if (!isset($_POST['key'])) {
+        echo "エラー発生";
+        exit();
+        } 
         //招待コードの場合使用済みフラグ追加
         $code = $this->input->post('code');
         if ($code) {
@@ -199,6 +200,10 @@ class Marketing_summit extends CI_Controller
      */
     public function pay_complete()
     {
+        if (!isset($_POST['key'])) {
+        echo "エラー発生";
+        exit();
+        } 
         $this->form_validation->set_message('required', '%s を入力して下さい。');
         $this->form_validation->set_rules('payment', 'お支払い方法', 'required');
         //支払い方法を領収書にした場合
@@ -242,7 +247,8 @@ class Marketing_summit extends CI_Controller
             $data['sessions'] = $sessions;
             $this->load->view('check', $data);
             }
-        } else {
+        //支払い方法クレジットカードを選択した場合
+        } elseif ($this->form_validation->run() === true && $this->input->post('payment') == "クレジットカード") {
         }
     }
     /**

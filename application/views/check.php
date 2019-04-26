@@ -40,6 +40,7 @@
 
 <div class="form-wrap">
     <?php echo form_open('/Marketing_summit/pay_complete'); ?>
+    <?php echo form_hidden('key', TRUE) ?>
     <?php echo form_hidden('pass', $_POST['pass']) ?>
         <article class="main-article cool-forms">
             <header>

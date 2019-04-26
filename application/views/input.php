@@ -20,6 +20,7 @@
 
 <div class="form-wrap">
     <?php echo form_open('/Marketing_summit/check'); ?>
+    <?php echo form_hidden('key', TRUE) ?>
         <input type="hidden" name="pass" value='<?php echo set_value('pass', $_POST['pass'])?>'>
         <article class="main-article cool-forms">
             <header>
